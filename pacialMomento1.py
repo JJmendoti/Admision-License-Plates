@@ -111,7 +111,7 @@ if menu == "admi":
             print('El valor ingresdo para el programa debe ser numérico. intente de nuevo\n')
             selected_program=-1
         while((selected_program > (len(academicProgram)-1)) or (selected_program < 0)):
-            print(f'\nNo hemos podido reconocer el programa, intenta de nuevo.\n')
+            print('\nNo hemos podido reconocer el programa, intenta de nuevo.\n')
             program_counter = 0
             for program in academicProgram:
                 print(str(program_counter)+". "+str(program))
@@ -164,7 +164,7 @@ if menu == "admi":
             print(f"La cantidad de no binarios en el programa {academicProgram[k]} es: {str(counter_no_binary)}\n")
             print('---------------------------------------------------------------------------\n')
 
-    print(f"\n\nLos alumnos son:\n ")
+    print("\n\nLos alumnos son:\n ")
     for student in array_students:
         print(
             f"{student['name']}\t\tprograma: {academicProgram[int(student['program'])]}\t\tpromedio {student['average']} ")
@@ -174,6 +174,7 @@ else:
     countMen = 0
     countNb = 0
     while True:
+        sexValidate = True
         try:
             averageAge += int(input("Ingrese la edad: \n"))
             ageStudents = True
@@ -186,16 +187,19 @@ else:
                 ageStudents = True
             except:
                 ageStudents = False
-        sex = input("Ingrese sexo - m(mujer), h(hombre), nb(no binario)")
-        while(sex != 'm' and sex != 'h' and sex != 'nb'):
-            print(f"no hemos reconocido su eleccion de sexo '{sex}'. Intente de nuevo.\n")
+        while sexValidate:  
             sex = input("Ingrese sexo - m(mujer), h(hombre), nb(no binario) \n")
+            if sex != 'm' and sex != 'h' and sex != 'nb':
+                print(f"no hemos reconocido su eleccion de sexo '{sex}'. Intente de nuevo.\n")
             if sex == "m":
                 countWomen += 1
+                sexValidate = False
             elif sex == "h":
                 countMen += 1
+                sexValidate = False
             elif sex == "nb":
                 countNb += 1
+                sexValidate = False
         stopAdmission = input("\n si desea parar de matricular ingrese 0, de lo contrario cualquier tecla para continuar \n")
         countStudents += 1
         if stopAdmission == "0":
